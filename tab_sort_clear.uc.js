@@ -1462,19 +1462,16 @@
 
 
     // --- Toggle observers ---
-
-    function sortObserver() {
+    Services.prefs.addObserver(ENABLE_SORT_PREF, () => {
         CONFIG.featureConfig.sort = getPref(ENABLE_SORT_PREF, true);
         var sortButtons = document.querySelectorAll("#sort-button")
         sortButtons.forEach(x => x.disabled = CONFIG.featureConfig.sort);
-    }
-    function clearObserver() {
+    });
+    Services.prefs.addObserver(ENABLE_CLEAR_PREF, () => {
         CONFIG.featureConfig.sort = getPref(ENABLE_SORT_PREF, true);
-        var sortButtons = document.querySelectorAll("#clear-button")
-        sortButtons.forEach(x => x.disabled = CONFIG.featureConfig.clear);
-    }
-    Services.prefs.addObserver(ENABLE_SORT_PREF, sortObserver);
-    Services.prefs.addObserver(ENABLE_CLEAR_PREF, clearObserver);
+        var clearButtons = document.querySelectorAll("#clear-button")
+        clearButtons.forEach(x => x.disabled = CONFIG.featureConfig.clear);
+    });
 
     // --- Button Initialization & Workspace Handling ---
 
@@ -1504,7 +1501,6 @@
                     `<toolbarbutton id="clear-button" command="cmd_zenClearTabs" label="↓ Clear" tooltiptext="Close ungrouped, non-pinned tabs"/>`
                 );
                 if(!CONFIG.featureConfig.clear) buttonFragment.firstChild.disabled = true;
-                Services.prefs.addObserver()
                 container.appendChild(buttonFragment.firstChild.cloneNode(true));
                 console.log("BUTTONS: Clear button added to container:", container.id || container.className);
             } catch (e) {
