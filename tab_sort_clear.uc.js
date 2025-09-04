@@ -201,7 +201,7 @@
             transition: opacity 0.1s ease-in-out;
             position: absolute;
             /* Simple, stable positioning. The parent container's right edge never moves. */
-            right: 55px; 
+            right: 0px; 
             top: 50%;
             transform: translateY(-50%);
             font-size: 12px;
@@ -213,6 +213,9 @@
             color: gray;
             z-index: 10; /* Higher z-index to ensure buttons are on top */
             label { display: block; }
+        }
+        #sort-button:has(+ #clear-button) {
+            right: 55px;
         }
         #sort-button:hover {
             opacity: 1;
