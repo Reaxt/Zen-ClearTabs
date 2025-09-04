@@ -13,7 +13,7 @@
   },
     {
     "property": "extensions.tabgroups.enable_clear",
-    "label": "Enable the sort tabs button.",
+    "label": "Enable the clear tabs button.",
     "type": "checkbox",
     "defaultValue": true,
     "restart": true 
