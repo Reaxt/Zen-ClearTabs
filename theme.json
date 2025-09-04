@@ -1,10 +1,10 @@
 {
-    "id": "ai-tabgroups-zenbrowser",
-    "name": "Tidy Tabs",
+    "id": "Zen-ClearTabs",
+    "name": "I dunno man",
     "description": "Doesss this work?! ",
     "homepage": "https://github.com/Reaxt/Zen-ClearTabs/tree/rea-figuresout-sine",
     "preferences": "https://raw.githubusercontent.com/Reaxt/Zen-ClearTabs/refs/heads/rea-figuresout-sine/preferences.json",
-    "image": "https://github.com/Darsh-A/Ai-TabGroups-ZenBrowser/blob/rea-figuresout-sine/image.jpg?raw=true",
+    "image": "https://github.com/Darsh-A/Reaxt/Zen-ClearTabs/blob/rea-figuresout-sine/image.jpg?raw=true",
     "js": true,
     "readme": "https://raw.githubusercontent.com/Reaxt/Zen-ClearTabs/refs/heads/main/README.md",
     "author": "Darsh A",
