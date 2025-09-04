@@ -1464,6 +1464,7 @@
         if (!container) return;
 
         // Ensure Sort Button
+        console.log(CONFIG.featureConfig);
         if (!container.querySelector('#sort-button') && CONFIG.featureConfig.sort) {
             try {
                 const buttonFragment = window.MozXULElement.parseXULToFragment(
