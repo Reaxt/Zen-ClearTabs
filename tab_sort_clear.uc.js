@@ -1461,6 +1461,21 @@
     };
 
 
+    // --- Toggle observers ---
+
+    function sortObserver() {
+        CONFIG.featureConfig.sort = getPref(ENABLE_SORT_PREF, true);
+        var sortButtons = document.querySelectorAll("#sort-button")
+        sortButtons.forEach(x => x.disabled = true);
+    }
+    function clearObserver() {
+        CONFIG.featureConfig.sort = getPref(ENABLE_SORT_PREF, true);
+        var sortButtons = document.querySelectorAll("#sort-button")
+        sortButtons.forEach(x => x.disabled = true);
+    }
+    Services.prefs.addObserver(ENABLE_SORT_PREF, sortObserver);
+    Services.prefs.addObserver(ENABLE_CLEAR_PREF, clearObserver);
+
     // --- Button Initialization & Workspace Handling ---
 
     function ensureButtonsExist(container) {
@@ -1468,11 +1483,13 @@
 
         // Ensure Sort Button
         console.log(CONFIG.featureConfig);
-        if (!container.querySelector('#sort-button') && CONFIG.featureConfig.sort) {
+        if (!container.querySelector('#sort-button')) {
             try {
                 const buttonFragment = window.MozXULElement.parseXULToFragment(
                     `<toolbarbutton id="sort-button" command="cmd_zenSortTabs" label="⇅ Sort" tooltiptext="Sort Tabs into Groups by Topic (AI)"/>`
                 );
+                if(!CONFIG.featureConfig.sort) buttonFragment.firstChild.disabled = true;
+
                 container.appendChild(buttonFragment.firstChild.cloneNode(true));
                 console.log("BUTTONS: Sort button added to container:", container.id || container.className);
             } catch (e) {
@@ -1481,11 +1498,13 @@
         }
 
         // Ensure Clear Button
-        if (!container.querySelector('#clear-button') && CONFIG.featureConfig.clear) {
+        if (!container.querySelector('#clear-button')) {
             try {
                 const buttonFragment = window.MozXULElement.parseXULToFragment(
                     `<toolbarbutton id="clear-button" command="cmd_zenClearTabs" label="↓ Clear" tooltiptext="Close ungrouped, non-pinned tabs"/>`
                 );
+                if(!CONFIG.featureConfig.clear) buttonFragment.firstChild.disabled = true;
+                Services.prefs.addObserver()
                 container.appendChild(buttonFragment.firstChild.cloneNode(true));
                 console.log("BUTTONS: Clear button added to container:", container.id || container.className);
             } catch (e) {

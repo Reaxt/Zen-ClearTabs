@@ -8,16 +8,14 @@
     "property": "extensions.tabgroups.enable_sort",
     "label": "Enable the sort tabs button.",
     "type": "checkbox",
-    "defaultValue": true,
-    "restart": true
-  },
+    "defaultValue": true
+    },
     {
     "property": "extensions.tabgroups.enable_clear",
     "label": "Enable the clear tabs button.",
     "type": "checkbox",
-    "defaultValue": true,
-    "restart": true 
-  },
+    "defaultValue": true
+    },
   {
     "property": "extensions.tabgroups.ai_model",
     "label": "Choose AI - Gemini, Ollama, or Mistral",
