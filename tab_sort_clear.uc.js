@@ -1466,12 +1466,12 @@
     function sortObserver() {
         CONFIG.featureConfig.sort = getPref(ENABLE_SORT_PREF, true);
         var sortButtons = document.querySelectorAll("#sort-button")
-        sortButtons.forEach(x => x.disabled = true);
+        sortButtons.forEach(x => x.disabled = CONFIG.featureConfig.sort);
     }
     function clearObserver() {
         CONFIG.featureConfig.sort = getPref(ENABLE_SORT_PREF, true);
-        var sortButtons = document.querySelectorAll("#sort-button")
-        sortButtons.forEach(x => x.disabled = true);
+        var sortButtons = document.querySelectorAll("#clear-button")
+        sortButtons.forEach(x => x.disabled = CONFIG.featureConfig.clear);
     }
     Services.prefs.addObserver(ENABLE_SORT_PREF, sortObserver);
     Services.prefs.addObserver(ENABLE_CLEAR_PREF, clearObserver);
