@@ -1465,12 +1465,12 @@
     Services.prefs.addObserver(ENABLE_SORT_PREF, () => {
         CONFIG.featureConfig.sort = getPref(ENABLE_SORT_PREF, true);
         var sortButtons = document.querySelectorAll("#sort-button")
-        sortButtons.forEach(x => x.disabled = CONFIG.featureConfig.sort);
+        sortButtons.forEach(x => x.hidden = !CONFIG.featureConfig.sort);
     });
     Services.prefs.addObserver(ENABLE_CLEAR_PREF, () => {
         CONFIG.featureConfig.sort = getPref(ENABLE_SORT_PREF, true);
         var clearButtons = document.querySelectorAll("#clear-button")
-        clearButtons.forEach(x => x.disabled = CONFIG.featureConfig.clear);
+        clearButtons.forEach(x => x.hidden = !CONFIG.featureConfig.clear);
     });
 
     // --- Button Initialization & Workspace Handling ---
