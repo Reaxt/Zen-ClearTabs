@@ -310,7 +310,7 @@
             }
         }
         /* when we only have clear */
-        @media (-moz-bool-pref: "${ENABLE_CLEAR_PREF}") and not (-moz-bool-pref: "${ENABLE_SORT_PREF}") {
+        @media (-moz-bool-pref: "${ENABLE_CLEAR_PREF}") and (not (-moz-bool-pref: "${ENABLE_SORT_PREF}")) {
             .pinned-tabs-container-separator:hover::before {
                 width: calc(100% - 60px);
                 background-color: var(--lwt-toolbarbutton-hover-background, rgba(200, 200, 200, 0.2));
@@ -336,7 +336,7 @@
 
         }
         /* when we only have sort */
-        @media not (-moz-bool-pref: "${ENABLE_CLEAR_PREF}") and (-moz-bool-pref: "${ENABLE_SORT_PREF}") {
+        @media (not (-moz-bool-pref: "${ENABLE_CLEAR_PREF}")) and (-moz-bool-pref: "${ENABLE_SORT_PREF}") {
             .pinned-tabs-container-separator:hover::before {
                 width: calc(100% - 65px);
                 background-color: var(--lwt-toolbarbutton-hover-background, rgba(200, 200, 200, 0.2));
