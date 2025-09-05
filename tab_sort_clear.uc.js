@@ -215,7 +215,7 @@
             label { display: block; }
         }
 
-        @media (-moz-bool-pref: "${ENABLE_CLEAR_PREF}) {
+        @media (-moz-bool-pref: "${ENABLE_CLEAR_PREF}") {
         
             #sort-button {
             right: 55px;
