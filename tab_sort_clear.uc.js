@@ -252,6 +252,20 @@
             border-radius: 4px;
         }
         
+        /* disable the buttons according to preferences */
+        @media not (-moz-bool-pref: "${ENABLE_SORT_PREF}") {
+        
+            #sort-button {
+            display: none;
+            }
+        }
+        @media not (-moz-bool-pref: "${ENABLE_CLEAR_PREF}") {
+        
+            #clear-button {
+            display: none;
+            }
+        }
+
         /*======== sort-button , clear-button ============*/
         .pinned-tabs-container-separator{
             height: 100% !important;
@@ -1489,18 +1503,6 @@
         }
     };
 
-
-    // --- Toggle observers ---
-    Services.prefs.addObserver(ENABLE_SORT_PREF, () => {
-        CONFIG.featureConfig.sort = getPref(ENABLE_SORT_PREF, true);
-        var sortButtons = document.querySelectorAll("#sort-button")
-        sortButtons.forEach(x => x.hidden = !CONFIG.featureConfig.sort);
-    });
-    Services.prefs.addObserver(ENABLE_CLEAR_PREF, () => {
-        CONFIG.featureConfig.clear = getPref(ENABLE_CLEAR_PREF, true);
-        var clearButtons = document.querySelectorAll("#clear-button")
-        clearButtons.forEach(x => x.hidden = !CONFIG.featureConfig.clear);
-    });
 
     // --- Button Initialization & Workspace Handling ---
 
