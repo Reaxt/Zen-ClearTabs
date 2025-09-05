@@ -214,9 +214,15 @@
             z-index: 10; /* Higher z-index to ensure buttons are on top */
             label { display: block; }
         }
-        #sort-button:has(+ #clear-button) {
+
+        @media (-moz-bool-pref: "${ENABLE_CLEAR_PREF}) {
+        
+            #sort-button {
             right: 55px;
+            }
         }
+
+
         #sort-button:hover {
             opacity: 1;
             color: white;
@@ -273,27 +279,87 @@
         }
         
         /* Disable hover width tweak when actively sorting to avoid overriding animation */
-        .pinned-tabs-container-separator.separator-is-sorting:has(#sort-button):has(#clear-button):hover::before {
+        .pinned-tabs-container-separator.separator-is-sorting:hover::before {
             width: 100% !important;
         }
-        .pinned-tabs-container-separator:has(#sort-button):has(#clear-button):hover::before {
-            width: calc(100% - 115px);
-            background-color: var(--lwt-toolbarbutton-hover-background, rgba(200, 200, 200, 0.2));
+
+        /* widths for when we have both enabled */
+        @media (-moz-bool-pref: "${ENABLE_CLEAR_PREF}") and (-moz-bool-pref: "${ENABLE_SORT_PREF}") {
+
+            .pinned-tabs-container-separator:hover::before {
+                width: calc(100% - 115px);
+                background-color: var(--lwt-toolbarbutton-hover-background, rgba(200, 200, 200, 0.2));
+            }
+            .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator:hover::before {
+                width: calc(100% - 115px);
+            }
+
+            /* Make sure the separator background adjusts for buttons during sorting ONLY when hovered */
+            .separator-is-sorting:hover::before {
+                width: calc(100% - 115px) !important;
+            }
+
+            /* Make the animated overlay shrink when hovering over buttons */
+            .pinned-tabs-container-separator.separator-is-sorting:hover::after {
+                width: calc(100% - 115px);
+            }
+
+            /* For zen-workspace-tabs-section with hide-separator */
+           .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator.separator-is-sorting:hover::after {
+                width: calc(100% - 115px);
+            }
         }
-        .pinned-tabs-container-separator.separator-is-sorting:has(#sort-button):not(:has(#clear-button)):hover::before {
-            width: 100% !important;
+        /* when we only have clear */
+        @media (-moz-bool-pref: "${ENABLE_CLEAR_PREF}") and not (-moz-bool-pref: "${ENABLE_SORT_PREF}") {
+            .pinned-tabs-container-separator:hover::before {
+                width: calc(100% - 60px);
+                background-color: var(--lwt-toolbarbutton-hover-background, rgba(200, 200, 200, 0.2));
+            }
+            .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator:hover::before {
+                width: calc(100% - 60px);
+            }
+
+            /* Make sure the separator background adjusts for buttons during sorting ONLY when hovered */
+            .separator-is-sorting:hover::before {
+                width: calc(100% - 60px) !important;
+            }
+
+            /* Make the animated overlay shrink when hovering over buttons */
+            .pinned-tabs-container-separator.separator-is-sorting:hover::after {
+                width: calc(100% - 60px);
+            }
+
+            /* For zen-workspace-tabs-section with hide-separator */
+            .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator.separator-is-sorting:hover::after {
+                width: calc(100% - 60px);
+            }
+
         }
-        .pinned-tabs-container-separator:has(#sort-button):not(:has(#clear-button)):hover::before {
-            width: calc(100% - 65px);
-            background-color: var(--lwt-toolbarbutton-hover-background, rgba(200, 200, 200, 0.2));
+        /* when we only have sort */
+        @media not (-moz-bool-pref: "${ENABLE_CLEAR_PREF}") and (-moz-bool-pref: "${ENABLE_SORT_PREF}") {
+            .pinned-tabs-container-separator:hover::before {
+                width: calc(100% - 65px);
+                background-color: var(--lwt-toolbarbutton-hover-background, rgba(200, 200, 200, 0.2));
+            }
+            .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator:hover::before {
+                width: calc(100% - 65px);
+            }
+            /* Make sure the separator background adjusts for buttons during sorting ONLY when hovered */
+            .separator-is-sorting:hover::before {
+                width: calc(100% - 65px) !important;
+            }
+
+            /* Make the animated overlay shrink when hovering over buttons */
+            .pinned-tabs-container-separator.separator-is-sorting:hover::after {
+                width: calc(100% - 65px);
+            }
+
+            /* For zen-workspace-tabs-section with hide-separator */
+            .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator.separator-is-sorting:hover::after {
+                width: calc(100% - 65px);
+            }
         }
-        .pinned-tabs-container-separator.separator-is-sorting:not(:has(#sort-button)):has(#clear-button):hover::before {
-            width: 100% !important;
-        }
-        .pinned-tabs-container-separator:not(:has(#sort-button)):has(#clear-button):hover::before {
-            width: calc(100% - 60px);
-            background-color: var(--lwt-toolbarbutton-hover-background, rgba(200, 200, 200, 0.2));
-        }
+
 
         .pinned-tabs-container-separator:hover #sort-button,
         .pinned-tabs-container-separator:hover #clear-button {
@@ -310,24 +376,17 @@
         .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator:hover::before {
              background-color: var(--lwt-toolbarbutton-hover-background, rgba(200, 200, 200, 0.2));
         }
-        .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator.separator-is-sorting:has(#sort-button):has(#clear-button):hover::before {
+        .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator.separator-is-sorting:hover::before {
              width: 100% !important;
         }
-        .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator:has(#sort-button):has(#clear-button):hover::before {
-             width: calc(100% - 115px);
-        }
-        .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator.separator-is-sorting:has(#sort-button):not(:has(#clear-button)):hover::before {
-             width: 100% !important;
-        }
-        .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator:has(#sort-button):not(:has(#clear-button)):hover::before {
-             width: calc(100% - 65px);
-        }
-        .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator.separator-is-sorting:not(:has(#sort-button)):has(#clear-button):hover::before {
-             width: 100% !important;
-        }
-        .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator:not(:has(#sort-button)):has(#clear-button):hover::before {
-             width: calc(100% - 60px);
-        }
+
+
+
+        /* Make sure the separator background adjusts for buttons during sorting ONLY when hovered */
+
+        
+        
+        
         
 
 
@@ -351,16 +410,7 @@
             /* Let normal hover behavior control opacity and styling */
         }
         
-        /* Make sure the separator background adjusts for buttons during sorting ONLY when hovered */
-        .separator-is-sorting:hover:has(#sort-button):has(#clear-button)::before {
-            width: calc(100% - 115px) !important;
-        }
-        .separator-is-sorting:hover:has(#sort-button):not(:has(#clear-button))::before {
-            width: calc(100% - 65px) !important;
-        }
-        .separator-is-sorting:hover:not(:has(#sort-button)):has(#clear-button)::before {
-            width: calc(100% - 60px) !important;
-        }
+
         
 
 
@@ -393,27 +443,6 @@
             transition: width 0.1s ease-in-out;
         }
 
-        /* Make the animated overlay shrink when hovering over buttons */
-        .pinned-tabs-container-separator.separator-is-sorting:has(#sort-button):has(#clear-button):hover::after {
-            width: calc(100% - 115px);
-        }
-        .pinned-tabs-container-separator.separator-is-sorting:has(#sort-button):not(:has(#clear-button)):hover::after {
-            width: calc(100% - 65px);
-        }
-        .pinned-tabs-container-separator.separator-is-sorting:not(:has(#sort-button)):has(#clear-button):hover::after {
-            width: calc(100% - 60px);
-        }
-
-        /* For zen-workspace-tabs-section with hide-separator */
-        .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator.separator-is-sorting:has(#sort-button):has(#clear-button):hover::after {
-            width: calc(100% - 115px);
-        }
-        .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator.separator-is-sorting:has(#sort-button):not(:has(#clear-button)):hover::after {
-            width: calc(100% - 65px);
-        }
-        .zen-workspace-tabs-section[hide-separator] .pinned-tabs-container-separator.separator-is-sorting:not(:has(#sort-button)):has(#clear-button):hover::after {
-            width: calc(100% - 60px);
-        }
         /* Remove hover interference: animated color stays visible while sorting */
         .pinned-tabs-container-separator.separator-is-sorting:hover::before { background-image: none !important; }
         
@@ -1468,7 +1497,7 @@
         sortButtons.forEach(x => x.hidden = !CONFIG.featureConfig.sort);
     });
     Services.prefs.addObserver(ENABLE_CLEAR_PREF, () => {
-        CONFIG.featureConfig.sort = getPref(ENABLE_SORT_PREF, true);
+        CONFIG.featureConfig.clear = getPref(ENABLE_CLEAR_PREF, true);
         var clearButtons = document.querySelectorAll("#clear-button")
         clearButtons.forEach(x => x.hidden = !CONFIG.featureConfig.clear);
     });
